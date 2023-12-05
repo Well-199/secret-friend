@@ -5,6 +5,7 @@ import https from 'https'
 import http from 'http'
 import { Request, Response } from 'express'
 import siteRoutes from './routes/site'
+import adminRoutes from './routes/admin'
 import { requestIntercepter } from './utils/requestIntercepter'
 
 const app = express()
@@ -15,7 +16,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.all('*', requestIntercepter)
 
-//app.use('/adimin', adminRoutes)
+app.use('/admin', adminRoutes)
 app.use('/', siteRoutes)
 app.use((req: Request, res: Response) => {
     res.status(404).json({ error: '🙁 404 error not found'})
