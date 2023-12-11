@@ -4,7 +4,10 @@ import * as auth from '../controllers/auth'
 
 const router = Router()
 
-router.get('/ping', (req: Request, res: Response) => res.status(200).json({ pong: true }))
 router.post('/login', auth.login)
+
+router.get('/ping', auth.validate, (req: Request, res: Response) => {
+    res.status(200).json({ pong: true, admin: true })
+})
 
 export default router
